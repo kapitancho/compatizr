@@ -32,24 +32,25 @@ Include this anywhere in your HEAD section:
 <script type="text/javascript" src="compatizr/compatizr.js"></script>
 
 There are two approaches.
-## Create a Compatizr object before including the script:
-### Example:
+### Create a Compatizr object before including the script:
+#### Example:
     window.Compatizr = {
         load : 'all', //The other value options are the same as those described in point 2.
         path : 'path-to-compatizr-folder'	
     };
     
-## Or use any of these after the script is included:
+### Or use any of these after the script is included:
 - Compatizr.loadAll();
 - Compatizr.load (true); //Loads all except localStorage and elementMethods.
 - Compatizr.load ('feature-name');
 - Compatizr.load (['feature1', 'feature2', ...]);
 - Compatizr.load ({feature1 : false, feature2 : true, ...});
 
-Then use Compatizr.onload (callback). "callback" will be invoked when all
+### Feature availability
+Use Compatizr.onload (callback). "callback" will be invoked when all
 compatibility script are loaded and ready to use.
 
-### Example: 
+#### Example: 
     Compatizr.onload (function() {
         var menu = document.querySelector ('.menu');
 	    menu.addEventListener ('click', function() {
