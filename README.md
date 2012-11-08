@@ -31,10 +31,11 @@ Include this anywhere in your HEAD section:
 
 There are two approaches.
 1. Create a Compatizr object before including the script:
-window.Compatizr = {
-	load : 'all',
-	path : 'path-to-compatizr-folder'	
-};
+    window.Compatizr = {
+        load : 'all',
+        path : 'path-to-compatizr-folder'	
+    };
+    
 2. Use any of these:
 - Compatizr.loadAll();
 - Compatizr.load (true); //Loads all except localStorage and elementMethods.
@@ -45,13 +46,13 @@ window.Compatizr = {
 Then use Compatizr.onload (callback). "callback" will be invoked when all
 compatibility script are loaded and ready to use.
 
-Example: 
-Compatizr.onload (function() {
-	var menu = document.querySelector ('.menu');
-	menu.addEventListener ('click', function() {
-		menu.classList.toggle ('visible');
-	}, true);
-});
+### Example: 
+    Compatizr.onload (function() {
+        var menu = document.querySelector ('.menu');
+	    menu.addEventListener ('click', function() {
+            menu.classList.toggle ('visible');
+        }, true);
+    });
 
 See demo.html for more details.
 
