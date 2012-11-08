@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style type="text/css">
+			body {
+		        behavior:url(#default#userData);		        				
+			}
+		</style>
+		<script>
+			function init() {
+				var localStorage = {},
+		        prefix = 'data-userdata',
+		        doc = document,		        
+		        attrSrc = doc.body,
+		        mark = function (key, isRemove, temp, reg) {
+		            attrSrc.load(prefix);
+		            temp = attrSrc.getAttribute(prefix) || '';
+		            reg = RegExp('\\b' + key + '\\b,?', 'i');
+
+		            var hasKey = reg.test(temp) ? 1 : 0;
+
+		            temp = isRemove ? temp.replace(reg, '') : hasKey ? temp : temp === '' ? key : temp.split(',').concat(key).join(',');
+
+		            attrSrc.setAttribute(prefix, temp);
+		            attrSrc.save(prefix);
+		        };
+		        
+		        attrSrc.addBehavior ('#default#userData');
+				
+		        localStorage.getItem = function (key) {
+		        	alert(attrSrc.runtimeStyle.behavior);
+		        	alert(attrSrc.currentStyle.behavior);
+		        	alert(attrSrc.behaviors);
+		        	alert(attrSrc.load);
+			        attrSrc.load(key);
+			        return attrSrc.getAttribute(key);
+			    };
+
+			    localStorage.setItem = function (key, value) {
+			        attrSrc.setAttribute(key, value);
+			        attrSrc.save(key);
+			        mark(key);
+			    };
+
+			    localStorage.removeItem = function (key) {
+			        attrSrc.removeAttribute(key);
+			        attrSrc.save(key);
+			        mark(key, 1);
+			    };
+
+			    // clear all attributes on <body> tag that using for textStorage 
+			    // and clearing them from the 
+			    // 'data-userdata' attribute's value of <body> tag
+			    
+			    localStorage.clear = function () {
+
+			        attrSrc.load(prefix);
+
+			        var attrs = attrSrc.getAttribute(prefix).split(','),
+			            len = attrs.length;
+
+			        if (attrs[0] === '') return;
+
+			        for (var i = 0; i < len; i++) {
+			            attrSrc.removeAttribute(attrs[i]);
+			            attrSrc.save(attrs[i]);
+			        };
+
+			        attrSrc.setAttribute(prefix, '');
+			        attrSrc.save(prefix);
+
+			    };
+			    
+			    parent.localStorage = localStorage;
+			}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

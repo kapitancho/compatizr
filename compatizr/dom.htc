@@ -1,0 +1,27 @@
+<PUBLIC:COMPONENT>
+    <PUBLIC:METHOD NAME="addEventListener" INTERNALNAME="_addEventListener" />
+    <PUBLIC:METHOD NAME="querySelector" INTERNALNAME="_querySelector" />
+    <PUBLIC:METHOD NAME="querySelectorAll" INTERNALNAME="_querySelectorAll" />
+    <PUBLIC:PROPERTY NAME="classList" INTERNALNAME="_classList" />
+	<script type="text/javascript">
+		/**
+		  * This htc file adds support to addEventListener, querySelector,		  
+		  * querySelectorAll and classList to all DOM Elements.
+		  *
+		  * IE6 and IE7 do not support prototyping on DOM elements
+		  * and IE behavior approach can be used instead. 
+		  * All functions are taken from window.Element.prototype that
+		  * contains these functions for IE8.
+		  *
+		  * This behavior should be used with care, especially for large pages.
+		  * An optimization may be achieved if the behavior is attached only on
+		  * elements that may need access to any of the
+		  */
+		var proto = window.Element.prototype;
+		
+        _addEventListener = proto.addEventListener;
+        _querySelector = proto.querySelector;
+        _querySelectorAll = proto.querySelectorAll;
+        _classList = new proto.classList (this);
+    </script>
+</PUBLIC:COMPONENT>

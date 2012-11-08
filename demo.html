@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script>
+			window.Compatizr = {
+				load : 'all'	
+			};
+		</script>	
+		<script src="compatizr/compatizr.js"></script>
+		<script>
+			Compatizr.onload (function() {
+				
+				var localField = document.getElementById ('localStorageValue');
+				localField.value = localStorage.getItem ('demo') || '';
+				
+				localField.addEventListener ('change', function() {
+					localStorage.setItem ('demo', localField.value);
+				}, true);
+
+				var sessionField = document.getElementById ('sessionStorageValue');
+				sessionField.value = sessionStorage.getItem ('demo') || '';
+				
+				sessionField.addEventListener ('change', function() {
+					sessionStorage.setItem ('demo', sessionField.value);
+				}, true);
+				
+				var mmv = document.getElementById ('matchMediaValue'); 
+				document.getElementById ('matchMediaCalculate').addEventListener ('click', function() {
+					alert (window.matchMedia (mmv.value).matches);
+				}, true);
+				
+				document.getElementById ('elementMethodsAddClass').addEventListener ('click', function() {
+					var nonSpecial = document.querySelector ('#elementMethodsDemo li:not(.special)');
+					if (nonSpecial) {
+						nonSpecial.classList.add ('special');
+					}
+				}, true);
+				
+				document.getElementById ('elementMethodsToggleClasses').addEventListener ('click', function() {
+					var elements = document.querySelectorAll ('#elementMethodsDemo li');
+					var cnt = elements.length;
+					for (var i = 0; i < cnt; i++) {
+						elements[i].classList.toggle ('special');
+					}
+				}, true);
+				
+				document.getElementById ('elementMethodsRemoveClass').addEventListener ('click', function() {
+					var special = document.querySelector ('#elementMethodsDemo li.special');
+					if (special) {
+						special.classList.remove ('special');
+					}
+				}, true);
+				
+			});
+		</script>
+		<style>
+			.special {
+				background: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="localStorageDemo">
+			<h2>Local Storage Demo</h2>
+			<input id="localStorageValue" />
+			<span>The value in that field will persist event if the browser is closed and then reopened.</span>
+		</div>
+		<div id="sessionStorageDemo">
+			<h2>Session Storage Demo</h2>
+			<input id="sessionStorageValue" />
+			<span>The value in that field will persist until the browser is closed.</span>
+		</div>
+		<div id="matchMediaDemo">
+			<h2>Match Media Demo</h2>
+			<input id="matchMediaValue" value="(min-width: 30px)" />
+			<input type="button" id="matchMediaCalculate" value="Evaluate" />
+			<span>Type in a media query and press the button to see the result</span>
+		</div>
+		<div id="elementMethodsDemo">
+			<h2>Element Methods Demo: classList, querySelector(All)</h2>
+			<input type="button" id="elementMethodsAddClass" value="Add class 'special' to the first element that does not have this class" />
+			<input type="button" id="elementMethodsToggleClasses" value="Toggle class 'special' for all the elements" />
+			<input type="button" id="elementMethodsRemoveClass" value="Remove class 'special' from the first element that has this class" />
+			<ul>
+				<li>Item 1</li>
+				<li class="special">Item 2</li>
+				<li>Item 3</li>
+				<li>Item 4</li>
+				<li class="special">Item 5</li>
+				<li>Item 6</li>
+				<li class="special">Item 7</li>
+				<li class="special">Item 8</li>
+				<li>Item 9</li>
+				<li class="special">Item 10</li>
+			</ul>
+		</div>
+	</body>
+</html>
