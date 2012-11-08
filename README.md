@@ -31,12 +31,13 @@ Include this anywhere in your HEAD section:
 
 There are two approaches.
 1. Create a Compatizr object before including the script:
+### Example:
     window.Compatizr = {
-        load : 'all',
+        load : 'all', //The other value options are the same as those described in point 2.
         path : 'path-to-compatizr-folder'	
     };
     
-2. Use any of these:
+2. Use any of these after the script is included:
 - Compatizr.loadAll();
 - Compatizr.load (true); //Loads all except localStorage and elementMethods.
 - Compatizr.load ('feature-name');
